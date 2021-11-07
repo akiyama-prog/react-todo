@@ -1,0 +1,19 @@
+{
+    "todos": [
+        {
+            "id": 1,
+            "content": "installする",
+            "done": true
+        },
+        {
+            "id": 2,
+            "content": "json server create temporary api",
+            "done": false
+        },
+        {
+            "id": 1,
+            "content": "install chakra ui",
+            "done": false
+        }
+    ]
+}
