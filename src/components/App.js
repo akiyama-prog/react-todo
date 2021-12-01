@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-const todoDataUrl = "http://localhost:3100/todos";//ローカルのモックサーバーのURL
+import React, { useRef } from "react";
+import { useTodo } from "../hooks/useTodo";
 
 const TodoTitle = ({ title, as }) => {
     if (as === 'h1') return <h1>{title}</h1>;
@@ -26,21 +24,31 @@ const TodoList = ({ todoList }) => {
                 <TodoItem todo={todo} key={todo.id}></TodoItem>
             ))}
         </ul>
-    )
-}
+    );
+};
+
+const TodoAdd = ({ inputEl, handleAddTodoListItem }) => {
+    return (
+        <>
+            <textarea ref={inputEl} />
+            <button onClick={handleAddTodoListItem}>+ todoを追加</button>
+        </>
+    );
+};
 
 function App() {
-    const [todoList, setTodoList] = useState([]);
-    useEffect(() => {
-        //非同期処理
-        const fetchData = async () => {
-            const response = await axios.get(todoDataUrl);
+    const {
+        todoList,//現在のtodoの状態
+        addTodoListItem,//新規タスクの追加
+    } = useTodo();
 
-            setTodoList(response.data);
-        };
-        fetchData();
-    }, []);
-
+    const inputEl = useRef(null);//refオブジェクトを作成
+    //入力フォームで入力された文字列を新しいtodoに登録するための関数
+    const handleAddTodoListItem = () => {
+        if (inputEl.current.value === "") return;
+        addTodoListItem(inputEl.current.value);
+        inputEl.current.value = "";
+    };
     //未完了のタスクをもつ配列作成
     const inCompletedList = todoList.filter((todo) => {
         return !todo.done;
@@ -52,8 +60,9 @@ function App() {
     return (
         <>
             <TodoTitle title='Todoリスト' as='h1'></TodoTitle>
-            <textarea></textarea>
-            <button>+ add</button>
+
+            <TodoAdd inputEl={inputEl} handleAddTodoListItem={handleAddTodoListItem} />
+
             <TodoTitle title='未完了タスク' as='h2'></TodoTitle>
             <TodoList todoList={inCompletedList}></TodoList>
 

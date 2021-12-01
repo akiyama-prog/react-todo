@@ -1,19 +1,29 @@
 {
-    "todos": [
-        {
-            "id": 1,
-            "content": "installする",
-            "done": true
-        },
-        {
-            "id": 2,
-            "content": "json server create temporary api",
-            "done": false
-        },
-        {
-            "id": 1,
-            "content": "install chakra ui",
-            "done": false
-        }
-    ]
+  "todos": [
+    {
+      "id": 1,
+      "content": "installする",
+      "done": true
+    },
+    {
+      "id": 2,
+      "content": "json server create temporary api",
+      "done": false
+    },
+    {
+      "id": 1,
+      "content": "install chakra ui",
+      "done": false
+    },
+    {
+      "content": "todo add を作成",
+      "id": "01FMVVTYP7XV48HA4MJBBZ95SP",
+      "done": false
+    },
+    {
+      "content": "できた！！",
+      "id": "01FMVVV9SNQMM0XCPRQPW5SEXF",
+      "done": false
+    }
+  ]
 }
