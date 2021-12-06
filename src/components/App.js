@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useTodo } from "../hooks/useTodo";
+import { TodoAdd } from "./TodoAdd";
 
 const TodoTitle = ({ title, as }) => {
     if (as === 'h1') return <h1>{title}</h1>;
@@ -32,14 +33,7 @@ const TodoList = ({ todoList, toggleTodoListItemStatus, deleteTodoListItem }) =>
     );
 };
 
-const TodoAdd = ({ inputEl, handleAddTodoListItem }) => {
-    return (
-        <>
-            <textarea ref={inputEl} />
-            <button onClick={handleAddTodoListItem}>+ todoを追加</button>
-        </>
-    );
-};
+
 
 function App() {
     const {
@@ -68,7 +62,7 @@ function App() {
         <>
             <TodoTitle title='Todoリスト' as='h1'></TodoTitle>
 
-            <TodoAdd inputEl={inputEl} handleAddTodoListItem={handleAddTodoListItem} />
+            <TodoAdd inputEl={inputEl} handleAddTodoListItem={handleAddTodoListItem} buttonText="+ todoを追加" />
 
             <TodoTitle title='未完了タスク' as='h2'></TodoTitle>
             <TodoList todoList={inCompletedList}
