@@ -1,39 +1,8 @@
 import React, { useRef } from "react";
 import { useTodo } from "../hooks/useTodo";
 import { TodoAdd } from "./TodoAdd";
-
-const TodoTitle = ({ title, as }) => {
-    if (as === 'h1') return <h1>{title}</h1>;
-    if (as === 'h2') return <h2>{title}</h2>;
-    return <p>{title}</p>;
-};
-
-const TodoItem = ({ todo, toggleTodoListItemStatus, deleteTodoListItem }) => {
-    //todoの状態を反転させる関数を実行させる関数
-    const handleToggleTodoListItemStatus = () => toggleTodoListItemStatus(todo.id, todo.done);
-    const handleDeleteTodoListItem = () => deleteTodoListItem(todo.id);
-    return (
-        <li>
-            { todo.content}
-            < button onClick={handleToggleTodoListItemStatus} >
-                {todo.done ? '未完了リストへ' : '完了リスト'}
-            </button>
-            <button onClick={handleDeleteTodoListItem}>削除</button>
-        </li>
-    );
-};
-
-const TodoList = ({ todoList, toggleTodoListItemStatus, deleteTodoListItem }) => {
-    return (
-        <ul>
-            {todoList.map((todo) => (
-                <TodoItem todo={todo} key={todo.id} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem}></TodoItem>
-            ))}
-        </ul>
-    );
-};
-
-
+import { TodoTitle } from "./TodoTitle";
+import { TodoList } from "./TodoList";
 
 function App() {
     const {
@@ -64,14 +33,13 @@ function App() {
 
             <TodoAdd inputEl={inputEl} handleAddTodoListItem={handleAddTodoListItem} buttonText="+ todoを追加" />
 
-            <TodoTitle title='未完了タスク' as='h2'></TodoTitle>
             <TodoList todoList={inCompletedList}
                 toggleTodoListItemStatus={toggleTodoListItemStatus}
                 deleteTodoListItem={deleteTodoListItem}
+                title='未完了タスク' as='h2'
             />
 
-            <TodoTitle title='完了タスク' as='h2'></TodoTitle>
-            <TodoList todoList={completedList} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} />
+            <TodoList todoList={completedList} toggleTodoListItemStatus={toggleTodoListItemStatus} deleteTodoListItem={deleteTodoListItem} title='完了タスク' as='h2' />
 
         </>
     );
